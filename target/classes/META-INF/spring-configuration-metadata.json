@@ -1,0 +1,17 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.wre.game.api.entity.RechargeInfo",
+      "name": "recharge",
+      "type": "com.wre.game.api.entity.RechargeInfo"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.wre.game.api.entity.RechargeInfo",
+      "name": "recharge.port",
+      "type": "java.lang.Integer"
+    }
+  ]
+}

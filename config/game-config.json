@@ -1,0 +1,130 @@
+{
+  "gameInfoList": [
+    {
+      "appId": "dongwuyiguan_gp",
+      "appSecret": "dongwuyiguan_gp",
+      "appName": "dongwuyiguan_gp",
+      "serverVersion": "1.0.0",
+      "publicKey":""
+    },
+    {
+      "appId": "uugame_dongwuyiguan_gp",
+      "appSecret": "uugame_dongwuyiguan_gp",
+      "appName": "uugame_dongwuyiguan_gp",
+      "serverVersion": "1.0.0",
+      "publicKey":""
+    },
+    {
+      "appId": "kitchen_warrior_ioshw",
+      "appSecret": "kitchen_warrior_ioshw",
+      "appName": "kitchen_warrior_ioshw",
+      "serverVersion": "1.0.0",
+      "publicKey":""
+    },
+    {
+      "appId": "liushuixian_ks_androidhw",
+      "appSecret": "liushuixian_ks_androidhw",
+      "appName": "liushuixian_ks_androidhw",
+      "serverVersion": "1.0.0",
+      "publicKey":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAni17tVEL0fCtYGsU+x+Jv7x/yugQNguzQ70lzBbqg3TBhSfs6zAHLvH7rDI94OdOrhy2vYH2NvVCEvmCkfE/+ZoU20/t04i92w8ZIh40sAq/zIZfl1PJ0PsrSDSt3sSW1GZQLNiED7tV7iFfcpU8ZTpOIgRdAsuCz7quL9Au8e0iXaB4HRfgecBfRJUCK7Ng/WcuU/q0st/TUFPYWYWs7sx2h9rz6hSGTjpayv+JrmZjNCrJCpDZPBGXkO5mhDRu6T4PY8vw1FerXY0ChP9//fSQ+qLsjZU6UIiimSMYe9/sic7JkUt63NVL2YWi5/xzFf4thzSyDiSFWZfrAdg0cQIDAQAB"
+    },
+    {
+      "appId": "liushuixian_ks_ioshw",
+      "appSecret": "liushuixian_ks_ioshw",
+      "appName": "liushuixian_ks_ioshw",
+      "serverVersion": "1.0.0",
+      "publicKey":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAni17tVEL0fCtYGsU+x+Jv7x/yugQNguzQ70lzBbqg3TBhSfs6zAHLvH7rDI94OdOrhy2vYH2NvVCEvmCkfE/+ZoU20/t04i92w8ZIh40sAq/zIZfl1PJ0PsrSDSt3sSW1GZQLNiED7tV7iFfcpU8ZTpOIgRdAsuCz7quL9Au8e0iXaB4HRfgecBfRJUCK7Ng/WcuU/q0st/TUFPYWYWs7sx2h9rz6hSGTjpayv+JrmZjNCrJCpDZPBGXkO5mhDRu6T4PY8vw1FerXY0ChP9//fSQ+qLsjZU6UIiimSMYe9/sic7JkUt63NVL2YWi5/xzFf4thzSyDiSFWZfrAdg0cQIDAQAB"
+    },
+    {
+      "appId": "queen_warrior_gp",
+      "appSecret": "queen_warrior_gp",
+      "appName": "queen_warrior_gp",
+      "serverVersion": "1.0.0",
+      "publicKey":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApRyGP3TZRLbAlggj+bl5PWicsPntT5Akoo8L+ggqNcdInFjji7TPmwfrRUOREzzry4Ql0r29Wa6Z29xzqhj9T50Ge7NinSDGa5xXCQA64MAVyswsdIbdjuozRDsrXX02Z+W6rhTr+NhRcyQFuZtN1xHQbPGlpbX9RF/EVyPr3A7lpjuiWhb7TD+05bnhZzpb8RxP3831CvOBb/3fKhQVFfyb7yBeHJwZXtQwa38CJ3L2/qfXPcOAEa+frtWk51mLgP08yQBShfqERh0PoefBVvLAirvW71tR2XbYF6APowPSzIw1X6zHCVj3QWmRhOfZwF5yYkxe0ybYfGX1Tu1xiQIDAQAB"
+    },
+    {
+      "appId": "queen_warrior_ios",
+      "appSecret": "queen_warrior_ios",
+      "appName": "queen_warrior_ios",
+      "serverVersion": "1.0.0",
+      "publicKey":""
+    },
+    {
+      "appId": "shirenyu_warrior_androidhw",
+      "appSecret": "shirenyu_warrior_androidhw",
+      "appName": "shirenyu_warrior_androidhw",
+      "serverVersion": "1.0.0",
+      "publicKey":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoNwnIchGlxFJzu7Dbv1QO6ucfSatTkhN6IfiOrxzWlatEcv60D0TY9Ol4UjLw1pDHkGlHMCQReIbo/nrijrHXSgD9JHb0w7+Scq8DOibe+ixuf4K23DT4RyUUkFCDpK1NUPv8fytelqZaZZHe/6OEkrKj9+CKy0elzTyaFyf1b9BDnCf/7qTBxLQVXbuAyI28rX46pX6YYbCkWYf7geZB5Z20ikUFldjI2c5Wwqdb0PIB8dMA8pRUiYnn37Obwzh+4Qn+f8W++vnto06XyyUOsBz5GCs9/4T6i07Rqf+kPVnKVolWXl1fv+3x7XCWygWg7JN8n+Tv7JLmJiZoIoAbwIDAQAB"
+    },
+    {
+      "appId": "wakuang_baidu_androidhw",
+      "appSecret": "wakuang_baidu_androidhw",
+      "appName": "wakuang_baidu_androidhw",
+      "serverVersion": "1.0.0",
+      "publicKey":""
+    },
+    {
+      "appId": "wakuang_baidu_ioshw",
+      "appSecret": "wakuang_baidu_ioshw",
+      "appName": "wakuang_baidu_ioshw",
+      "serverVersion": "1.0.0",
+      "publicKey":""
+    },
+    {
+      "appId": "difu_warrior_androidhw",
+      "appSecret": "difu_warrior_androidhw",
+      "appName": "difu_warrior_androidhw",
+      "serverVersion": "1.0.0",
+      "publicKey":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmIFK3R501crZC0sje1krM2EIS3GiQWHCYd4Y3c3ODrUNPIaWbkop5GAbebQtMnjRW2FkUArREykhhCEp3B1r2znD9ScY0Mt26EFPI1inxd5eeUAjmFwdi6COVVAv+GlB1el2OIZEIOeThHC5Bi6i+G15xRYjHEua3iDbf/YXFauDP9w/3+pvZcwDKSZB0bXnXuZgSc8jjSS2yMDdnGB7zZYzYPXAbiaBnaxEl7OVblFgLDlLK7hh6LtRV4OXkYhqT5z4/JeZRACEZw1VvXQ85BgbrBxWDJ2zNtjD+FIuhWOpZWfsFnBEmuEZTOCqLM9DGVfqbo0Zq50lSkKp24Z51wIDAQAB"
+    },
+    {
+      "appId": "fashionFantasy_warrior_androidhw",
+      "appSecret": "fashionFantasy_warrior_androidhw",
+      "appName": "fashionFantasy_warrior_androidhw",
+      "serverVersion": "1.0.0",
+      "publicKey":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhiVGkd/qaoJX7YFrMVgjq1Xo+hO9YL6CY7VxnQz1qZxWDSALSvtqcPXt3T0klsxYcsaUze4nLRRK98B3VEyelzpvTbK0ORbuGt4DE/HxXneqogm3s6EpCQTmXgAd8Y6kHXmUkpSIm4Z7bSE9nUP2ZOBKMYilygfVd92XSj+TOi9RdhASdA8e++WkBi2JU0oIHslY/kxnuwdlBMkIMqts/CeyP0aJSnZG3Y9q/dI7olgK2HHek0NjBb1w+0fH+CK7bZuZW5SdMv4jzPmK5vmRA82RXaktM/FxO5spzuiOT8X6/phoHG62Riqk99xCT4b+StNCgLQ7y/CztaJlZlIkjQIDAQAB"
+    },
+    {
+      "appId": "yiguan_gp",
+      "appSecret": "yiguan_gp",
+      "appName": "yiguan_gp",
+      "serverVersion": "1.0.0",
+      "publicKey":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAggVzJWDLrOOxR/rv8E76AGYzTTtU/+Pn4oHJInj86sml30Q2JffH06kSJkbuVNOcuUdXKB8PLn64rs/yXELWTUTPuro9d7aRq+S7wdqaERaPFcrmGRu+6S+BpQB0Nj6uPcao7ABPGQ9/8Mb52hQdI9LErsxpI0gztkRlYqTnQNV8uTs0yUh6Kz5MA+K6AH6uktI73pbs4jFD6cJpxsLlGHgsBxm9QtudeMNmahyggY/9c9OXk2dnO+tN/OcB3r65Key8o3xTVUui2dtngCzCvnEqvvNLclSQBjWAq/i9Vgvh8GqtIheXZ7nIwk99DP+Q7H+OMyMzxTAHmtCu13obsQIDAQAB"
+    },
+    {
+      "appId": "difu_warrior_ioshw",
+      "appSecret": "difu_warrior_ioshw",
+      "appName": "difu_warrior_ioshw",
+      "serverVersion": "1.0.0",
+      "publicKey":""
+    },
+    {
+      "appId": "liushuixian_huawei_androidhw",
+      "appSecret": "liushuixian_huawei_androidhw",
+      "appName": "liushuixian_huawei_androidhw",
+      "serverVersion": "1.0.0",
+      "publicKey":""
+    },
+    {
+      "appId": "steelMill_warrior_androidhw",
+      "appSecret": "steelMill_warrior_androidhw",
+      "appName": "steelMill_warrior_androidhw",
+      "serverVersion": "1.0.0",
+      "publicKey":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAukNeNhK1JRqUsUhRhOJ3x7MLxcxCMBC1yCGejxpMdH1u2xqcLau9ukduOc4vNWNp3SMEHvZmT+fBLnbS7YmAKJdUKprfDtAOL/ddIozMvgEzdtzJgp0egRd949dl0F4ozskpL5indMrU8N10FPh2w6PVkCxZ5CHCjBcST2xgn9/HW/Kn6wutdKiPX7tirSv7i2tovGZWmrSI5QoPDRqJzB4Q6c/epRcSR669Mln6w8CR1bokhPjXwdrmq/w/xAOaqYie9/LQwzzlVtEbk9qblOoRt62zOiptNGgrAMIhOt4eGFvRQMdT6NXb/7/MgPASLL2kL49WFuZHtYH0Er+bXwIDAQAB"
+    },
+    {
+      "appId": "chocolate_warrior_androidhw",
+      "appSecret": "chocolate_warrior_androidhw",
+      "appName": "chocolate_warrior_androidhw",
+      "serverVersion": "1.0.0",
+      "publicKey":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0FWo14fHlX7B7LiLCFTq/uzw+Yl2frbv8ZjkXY+wgCO18qnFB/K+SPQQhYfdlffkyNK72N/Q140SC3nE0fadZRjbA93vyfLIIvYwTNnru9kuusE4ogCdhrkk0+8fJDOJwDDbZBAxbWfgbaEgBrHIbZq2VOZwFCk+uGIViUDem2TgQV0/XAp0y53P1Vrrc/pUC5+SqqVnLg3ldfXEq+NXKWfXq8j3dxPZq8Dn1YJ3VdUEOH2N8q6XHboPdqtyUib6UxP9U1E2LKIuH0+jcPW0rGxN90C+AV69jNSbq/ngaWkyQ3L89TRGBB7cHVRkFW/P8XAa1xZJfSoRRfQsn6VXsQIDAQAB"
+    },
+    {
+      "appId": "chocolate_warrior_ioshw",
+      "appSecret": "chocolate_warrior_ioshw",
+      "appName": "chocolate_warrior_ioshw",
+      "serverVersion": "1.0.0",
+      "publicKey":""
+    }
+  ]
+}

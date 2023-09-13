@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wre.game.api.dao.UserDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.wre.game.api.data.entity.User">
+        <result column="user_id" property="userId"/>
+        <result column="open_id" property="openId"/>
+        <result column="union_id" property="unionId"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="gender" property="gender"/>
+        <result column="city" property="city"/>
+        <result column="province" property="province"/>
+        <result column="country" property="country"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="block" property="block"/>
+        <result column="share_type" property="shareType"/>
+        <result column="share_from_uuid" property="shareFromUuid"/>
+        <result column="channel" property="channel"/>
+        <result column="app_id" property="appId"/>
+        <result column="app_name" property="appName"/>
+        <result column="app_version" property="appVersion"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+    <!-- Result Map-->
+    <resultMap id="ShareFromResultMap" type="com.wre.game.api.data.dto.UserShareFromDTO">
+        <result column="uuid" property="uuid"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="gender" property="gender"/>
+        <result column="city" property="city"/>
+        <result column="province" property="province"/>
+        <result column="country" property="country"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+
+    <!-- th_role_user table all fields -->
+    <sql id="Base_Column_List">
+    user_id, open_id, uuid, nick_name, avatar_url, block, channel, created_at
+    </sql>
+
+    <sql id="Base_Column_List_U">
+    u.user_id, u.open_id, u.uuid, u.nick_name, u.avatar_url, u.block, u.channel, u.created_at
+    </sql>
+
+    <sql id="Share_From_Column_List">
+      uuid, nick_name, avatar_url, country, province, city, gender, usf.created_at
+    </sql>
+
+    <insert id="insertUser" parameterType="com.wre.game.api.data.entity.User" useGeneratedKeys="true"
+            keyProperty="user_id">
+        <selectKey resultType="long" keyProperty="userId">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into `user` (uuid, open_id, anonymous_open_id, union_id, nick_name, gender, city, province, country, avatar_url, block,
+        share_type,
+        share_from_uuid, share_from_image, scene_id, channel, app_id, app_name, app_version, updated_at, created_at)
+        values (#{uuid}, #{openId}, #{anonymousOpenId} , #{unionId}, #{nickName}, #{gender}, #{city}, #{province}, #{country}, #{avatarUrl},
+        #{block}, #{shareType}, #{shareFromUuid}, #{shareFromImage}, #{sceneId}, #{channel}, #{appId}, #{appName}, #{appVersion}, now(), #{createdAt});
+    </insert>
+
+    <insert id="insertUserShareFrom" parameterType="java.util.HashMap" useGeneratedKeys="true"
+            keyProperty="id">
+        <selectKey resultType="long" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into `user_share_from` (from_uuid, to_uuid, share_type, app_id, app_name, created_at)
+        values (#{fromUuid}, #{toUuid}, #{shareType}, #{appId}, #{appName}, now());
+    </insert>
+
+    <insert id="insertUserShareFromFunctional" parameterType="java.util.HashMap" useGeneratedKeys="true"
+            keyProperty="id">
+        <selectKey resultType="long" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into `user_share_from_functional` (from_uuid, to_uuid, share_type, app_id, app_name, created_at)
+        values (#{fromUuid}, #{toUuid}, #{shareType}, #{appId}, #{appName}, now());
+    </insert>
+
+    <delete id="deleteUserById" parameterType="java.lang.Long">
+        delete from `user` where user_id=#{userId}
+    </delete>
+
+    <update id="updateUserById" parameterType="com.wre.game.api.data.entity.User">
+        update `user` set
+        <trim suffixOverrides=",">
+
+            <if test="openId != null and openId != ''">open_id=#{openId},</if>
+            <if test="unionId != null and unionId != ''">union_id=#{unionId},</if>
+            <if test="nickName != null and nickName != ''">nick_name=#{nickName},</if>
+            <if test="gender != null and gender != ''">gender=#{gender},</if>
+            <if test="city != null and city != ''">city=#{city},</if>
+            <if test="province != null and province != ''">province=#{province},</if>
+            <if test="country != null and country != ''">country=#{country},</if>
+            <if test="avatarUrl != null and avatarUrl != ''">avatar_url=#{avatarUrl},</if>
+            <if test="block != null and block != ''">block=#{block},</if>
+            <if test="shareType != null and shareType != ''">share_type=#{shareType},</if>
+            <if test="shareFromUuid != null and shareFromUuid != ''">share_from_uuid=#{shareFromUuid},</if>
+            <if test="channel != null and channel != ''">channel=#{channel},</if>
+            <if test="appId != null and appId != ''">app_id=#{appId},</if>
+            <if test="appName != null and appName != ''">app_name=#{appName},</if>
+            <if test="lastLoginTime != null and lastLoginTime != ''">last_login_time=#{lastLoginTime},</if>
+            <if test="appVersion != null and appVersion != ''">app_name=#{appVersion},</if>
+            updated_at=now(),
+
+        </trim>
+        where user_id=#{userId}
+    </update>
+
+
+
+
+<!--    <update id="updateUserByGroupType" parameterType="com.wre.game.api.data.entity.User">-->
+<!--        update `user` set-->
+<!--            group_type=#{groupType}-->
+<!--        where user_id=#{userId}-->
+<!--    </update>-->
+
+    <update id="updateLastLoginTimeById" parameterType="java.lang.Long">
+        update `user` set
+        <trim suffixOverrides=",">
+
+            last_login_time=now(),
+            updated_at=now(),
+
+        </trim>
+        where user_id=#{userId}
+    </update>
+
+    <select id="selectUserById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from `user` where user_id = #{userId}
+    </select>
+
+    <select id="selectUserByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from `user` where
+        open_id = #{openId}
+        limit 1
+    </select>
+
+    <select id="selectUserByOpenIdAndAppId" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `user` where
+        open_id = #{openId}
+        AND
+        app_id = #{appId}
+        limit 1
+    </select>
+
+    <select id="selectUserByChannelIdAndAppId" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List_U"/>
+        from `user` u
+        LEFT JOIN `user_channel` uc on uc.user_uuid=u.uuid
+        where
+        uc.user_channel_id = #{channelId}
+        AND
+        uc.user_app_id = #{appId}
+        and
+        u.channel=#{channelName}
+    </select>
+
+
+
+
+    <!--<select id="selectShareStatistics" resultMap="BaseResultMap" parameterType="java.util.HashMap">-->
+    <!--select-->
+    <!--<include refid="Base_Column_List"/>-->
+    <!--from `user` where-->
+    <!--share_from_uuid = #{uuid}-->
+    <!--and app_id=#{appId}-->
+    <!--<if test="shareType!='' and shareType!=null">-->
+    <!--and share_type=#{shareType}-->
+    <!--</if>-->
+    <!--<if test="startTime!=null and endTime!=null">-->
+    <!--and created_at between #{startTime} and #{endTime}-->
+    <!--</if>-->
+    <!--</select>-->
+
+    <select id="selectShareStatistics" resultMap="ShareFromResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Share_From_Column_List"/>
+        from `user_share_from` usf left join `user` u on usf.to_uuid = u.uuid where
+        usf.from_uuid = #{fromUuid}
+        and usf.app_id=#{appId}
+        <if test="shareType!='' and shareType!=null">
+            and usf.share_type=#{shareType}
+        </if>
+        <if test="startTime!=null and endTime!=null">
+            and usf.created_at between #{startTime} and #{endTime}
+        </if>
+    </select>
+
+    <select id="selectExistShareFrom" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+
+        select
+          count(id)
+        from `user_share_from`
+        where
+          from_uuid = #{fromUuid}
+        and
+          to_uuid = #{toUuid}
+        and
+          share_type = #{shareType}
+        and
+          app_id = #{appId}
+
+    </select>
+
+    <select id="selectShareStatisticsFunctional" resultMap="ShareFromResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Share_From_Column_List"/>
+        from `user_share_from_functional` usf left join `user` u on usf.to_uuid = u.uuid where
+        usf.from_uuid = #{fromUuid}
+        and usf.app_id=#{appId}
+        <if test="shareType!='' and shareType!=null">
+            and usf.share_type=#{shareType}
+        </if>
+        <if test="startTime!=null and endTime!=null">
+            and usf.created_at between #{startTime} and #{endTime}
+        </if>
+        limit 50
+    </select>
+
+    <select id="selectExistShareFromFunctional" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+
+        select
+          count(id)
+        from `user_share_from_functional`
+        where
+          from_uuid = #{fromUuid}
+        and
+          to_uuid = #{toUuid}
+        and
+          share_type = #{shareType}
+        and
+          app_id = #{appId}
+
+    </select>
+
+    <select id="selectShareFromFunctional" resultType="com.wre.game.api.data.entity.UserShareFrom"
+            parameterType="java.util.HashMap">
+
+        select
+          id,
+          from_uuid fromUuid,
+          to_uuid toUuid,
+          share_type shareType,
+          app_id appId,
+          app_name appName,
+          created_at createdAt
+        from `user_share_from_functional`
+        where
+          from_uuid = #{fromUuid}
+        and
+          to_uuid = #{toUuid}
+        and
+          share_type = #{shareType}
+        and
+          app_id = #{appId}
+        order by created_at DESC
+        limit 1;
+
+    </select>
+
+    <select id="selectUserList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `user`
+    </select>
+
+    <select id="selectCountCreatedAt" resultType="java.lang.Integer">
+        select
+            count(user_id)
+        from `user` where created_at between #{startTime} and #{endTime}
+        <if test="appName!=null">
+            AND  app_name = #{appName}
+        </if>
+        <choose>
+            <when test="shareType==null">
+                AND share_type is null
+            </when>
+            <when test="shareType!='all'">
+                AND share_type = #{shareType}
+            </when>
+        </choose>
+        <choose>
+            <when test="shareFromImage==null">
+                AND share_type is null
+            </when>
+            <when test="shareFromImage!='all'">
+                AND share_from_image = #{shareFromImage}
+            </when>
+        </choose>
+    </select>
+    <select id="getInvitedFriends" resultType="java.lang.Integer">
+        select
+        count(usf.to_uuid)
+        from `user_share_from_functional` usf left join `user` u on usf.to_uuid = u.uuid where
+        usf.from_uuid = #{fromUuid}
+        and usf.app_id=#{appId}
+        <if test="shareType!='' and shareType!=null">
+            and usf.share_type=#{shareType}
+        </if>
+
+    </select>
+    <select id="selectUserByUuid" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from `user` where uuid = #{uuid}
+    </select>
+
+</mapper>

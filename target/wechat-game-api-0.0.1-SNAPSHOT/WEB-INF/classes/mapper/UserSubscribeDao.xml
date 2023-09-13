@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wre.game.api.dao.UserSubscribeDao">
+  <resultMap id="BaseResultMap" type="com.wre.game.api.data.entity.UserSubscribe">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <id column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="subscribeDueTime" jdbcType="BIGINT" property="subscribeduetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, product_id, id, app_id, subscribeDueTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.wre.game.api.data.entity.UserSubscribeKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_subscribe
+    where user_id = #{userId,jdbcType=VARCHAR}
+      and product_id = #{productId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.wre.game.api.data.entity.UserSubscribeKey">
+    delete from user_subscribe
+    where user_id = #{userId,jdbcType=VARCHAR}
+      and product_id = #{productId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="com.wre.game.api.data.entity.UserSubscribe">
+    replace into user_subscribe (user_id,product_id, id, app_id,
+      subscribeDueTime)
+    values (#{userId,jdbcType=VARCHAR},#{productId,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR},
+      #{subscribeduetime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.wre.game.api.data.entity.UserSubscribe" useGeneratedKeys="true">
+    insert into user_subscribe
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="subscribeduetime != null">
+        subscribeDueTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribeduetime != null">
+        #{subscribeduetime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wre.game.api.data.entity.UserSubscribe">
+    update user_subscribe
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribeduetime != null">
+        subscribeDueTime = #{subscribeduetime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+      and product_id = #{productId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wre.game.api.data.entity.UserSubscribe">
+    update user_subscribe
+    set id = #{id,jdbcType=VARCHAR},
+      app_id = #{appId,jdbcType=VARCHAR},
+      subscribeDueTime = #{subscribeduetime,jdbcType=BIGINT}
+    where user_id = #{userId,jdbcType=VARCHAR}
+      and product_id = #{productId,jdbcType=VARCHAR}
+  </update>
+</mapper>

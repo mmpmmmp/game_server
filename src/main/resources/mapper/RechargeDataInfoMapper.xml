@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wre.game.api.dao.RechargeDataInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wre.game.api.data.entity.RechargeDataInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="roleId" jdbcType="BIGINT" javaType="java.lang.String" />
+      <arg column="productId" jdbcType="INTEGER" javaType="java.lang.String" />
+      <arg column="amount" jdbcType="REAL" javaType="java.lang.String" />
+      <arg column="statue" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="orderId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="serverId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="channelId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="uuGameId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="shopType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="createAT" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="updateAT" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wre.game.api.data.entity.RechargeDataInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="roleId" jdbcType="BIGINT" javaType="java.lang.String" />
+      <arg column="productId" jdbcType="INTEGER" javaType="java.lang.String" />
+      <arg column="amount" jdbcType="REAL" javaType="java.lang.String" />
+      <arg column="statue" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="orderId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="serverId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="channelId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="uuGameId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="shopType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="createAT" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="userId" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="updateAT" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, roleId, productId, amount, statue, orderId, serverId, channelId, uuGameId, type, 
+    shopType, createAT,updateAT
+  </sql>
+  <sql id="Blob_Column_List" >
+    userId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from recharge
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from recharge
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wre.game.api.data.entity.RechargeDataInfo" >
+    insert into recharge (id, roleId, productId, 
+      amount, statue, orderId, 
+      serverId, channelId, uuGameId, 
+      type, shopType, createAT, 
+      userId,updateAT)
+    values (#{id,jdbcType=BIGINT}, #{roleid,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=VARCHAR}, #{statue,jdbcType=INTEGER}, #{orderid,jdbcType=VARCHAR}, 
+      #{serverid,jdbcType=INTEGER}, #{channelid,jdbcType=VARCHAR}, #{uugameid,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{shoptype,jdbcType=INTEGER}, #{createat,jdbcType=TIMESTAMP}, 
+      #{userid,jdbcType=LONGVARCHAR},#{updateat,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wre.game.api.data.entity.RechargeDataInfo" >
+    insert into recharge
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleid != null" >
+        roleId,
+      </if>
+      <if test="productid != null" >
+        productId,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="statue != null" >
+        statue,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="serverid != null" >
+        serverId,
+      </if>
+      <if test="channelid != null" >
+        channelId,
+      </if>
+      <if test="uugameid != null" >
+        uuGameId,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="shoptype != null" >
+        shopType,
+      </if>
+      <if test="createat != null" >
+        createAT,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="updateat != null" >
+        updateAT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="statue != null" >
+        #{statue,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="serverid != null" >
+        #{serverid,jdbcType=INTEGER},
+      </if>
+      <if test="channelid != null" >
+        #{channelid,jdbcType=VARCHAR},
+      </if>
+      <if test="uugameid != null" >
+        #{uugameid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="shoptype != null" >
+        #{shoptype,jdbcType=INTEGER},
+      </if>
+      <if test="createat != null" >
+        #{createat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="updateat != null" >
+        #{updateat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+
+  <insert id="insertSelectiveLog" parameterType="com.wre.game.api.data.entity.RechargeDataInfo" >
+    insert into recharge_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleid != null" >
+        roleId,
+      </if>
+      <if test="productid != null" >
+        productId,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="statue != null" >
+        statue,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="serverid != null" >
+        serverId,
+      </if>
+      <if test="channelid != null" >
+        channelId,
+      </if>
+      <if test="uugameid != null" >
+        uuGameId,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="shoptype != null" >
+        shopType,
+      </if>
+      <if test="createat != null" >
+        createAT,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="updateat != null" >
+        updateAT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="statue != null" >
+        #{statue,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="serverid != null" >
+        #{serverid,jdbcType=INTEGER},
+      </if>
+      <if test="channelid != null" >
+        #{channelid,jdbcType=VARCHAR},
+      </if>
+      <if test="uugameid != null" >
+        #{uugameid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="shoptype != null" >
+        #{shoptype,jdbcType=INTEGER},
+      </if>
+      <if test="createat != null" >
+        #{createat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="updateat != null" >
+        #{updateat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wre.game.api.data.entity.RechargeDataInfo" >
+    update recharge
+    <set >
+      <if test="roleid != null" >
+        roleId = #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        productId = #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="statue != null" >
+        statue = #{statue,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        orderId = #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="serverid != null" >
+        serverId = #{serverid,jdbcType=INTEGER},
+      </if>
+      <if test="channelid != null" >
+        channelId = #{channelid,jdbcType=VARCHAR},
+      </if>
+      <if test="uugameid != null" >
+        uuGameId = #{uugameid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="shoptype != null" >
+        shopType = #{shoptype,jdbcType=INTEGER},
+      </if>
+      <if test="createat != null" >
+        createAT = #{createat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="updateat != null" >
+        updateAT = #{updateat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wre.game.api.data.entity.RechargeDataInfo" >
+    update recharge
+    set roleId = #{roleid,jdbcType=VARCHAR},
+      productId = #{productid,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=VARCHAR},
+      statue = #{statue,jdbcType=INTEGER},
+      orderId = #{orderid,jdbcType=VARCHAR},
+      serverId = #{serverid,jdbcType=INTEGER},
+      channelId = #{channelid,jdbcType=VARCHAR},
+      uuGameId = #{uugameid,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      shopType = #{shoptype,jdbcType=INTEGER},
+      createAT = #{createat,jdbcType=TIMESTAMP},
+      userId = #{userid,jdbcType=LONGVARCHAR},
+      updateAT = #{updateat,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wre.game.api.data.entity.RechargeDataInfo" >
+    update recharge
+    set roleId = #{roleid,jdbcType=VARCHAR},
+      productId = #{productid,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=VARCHAR},
+      statue = #{statue,jdbcType=INTEGER},
+      orderId = #{orderid,jdbcType=VARCHAR},
+      serverId = #{serverid,jdbcType=INTEGER},
+      channelId = #{channelid,jdbcType=VARCHAR},
+      uuGameId = #{uugameid,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      shopType = #{shoptype,jdbcType=INTEGER},
+      createAT = #{createat,jdbcType=TIMESTAMP},
+      updateAT = #{updateat,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <resultMap id="AddRecharge" type="com.wre.game.api.entity.AddRecharge" >
+      <result column="id" property="serialId" jdbcType="VARCHAR" />
+      <result column="productId" property="productId" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <select id="selectByUserIdAndAdd" resultMap="AddRecharge" parameterType="java.lang.String" >
+    select
+    id,productId
+    from recharge
+    where userId=#{userId,jdbcType=VARCHAR}
+    and statue=1
+  </select>
+  <select id="selectByRoleId" resultType="com.wre.game.api.data.entity.RechargeDataInfo" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from recharge
+    where roleId = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <select id="getSBDueTime" resultType="java.lang.Long">
+    select subscribeDueTime from  recharge where  roleId = #{roleId,jdbcType=VARCHAR}
+    and id=#{serialId}
+  </select>
+</mapper>

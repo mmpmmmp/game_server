@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wre.game.api.dao.UserGemMapper">
+    <resultMap id="BaseResultMap" type="com.wre.game.api.data.entity.UserGem">
+        <result column="user_id" property="userId"/>
+        <result column="gem" property="gem"/>
+        <result column="app_id" property="appId"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user_id, gem, app_id, created_at, app_id
+    </sql>
+    <insert id="insertUserGem">
+        insert into `user_gem` (user_id, gem, app_id, created_at)
+        values (#{userId}, #{gem}, #{appId}, now())
+    </insert>
+
+    <update id="updateUserGem">
+        update `user_gem`
+        set gem = #{gem}
+        where user_id = #{userId} and app_id = #{appId}
+    </update>
+
+    <select id="getUserGem" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `user_gem`
+        where user_id=#{userId} and app_id=#{appId}
+    </select>
+
+</mapper>

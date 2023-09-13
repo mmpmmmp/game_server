@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wre.game.api.dao.UserGameDataDao">
+    <!-- Result Map-->
+    <resultMap id="BaseResultMap" type="com.wre.game.api.data.entity.UserLoginHistory">
+        <result column="id" property="id"/>
+        <result column="uuid" property="uuid"/>
+        <result column="app_id" property="appId"/>
+        <result column="app_name" property="appName"/>
+    </resultMap>
+
+    <insert id="insertUserGameData" parameterType="com.wre.game.api.data.entity.UserGameData"
+            useGeneratedKeys="true"
+            keyProperty="id">
+        <selectKey resultType="long" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into `user_game_data` (uuid, app_id, app_name, param1, param2, param3, param4, param5, score, updated_at,
+        created_at)
+        values (#{uuid}, #{appId}, #{appName}, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{score}, now(),
+        now());
+    </insert>
+
+    <update id="updateUserGameData" parameterType="com.wre.game.api.data.entity.UserGameData">
+        update `user_game_data` set
+        <trim suffixOverrides=",">
+
+            <if test="appName != null ">app_name=#{appName},</if>
+            <if test="param1 != null ">param1=#{param1},</if>
+            <if test="param2 != null ">param2=#{param2},</if>
+            <if test="param3 != null ">param3=#{param3},</if>
+            <if test="param4 != null ">param4=#{param4},</if>
+            <if test="param5 != null ">param5=#{param5},</if>
+            <if test="score != null ">score=#{score},</if>
+            updated_at=now(),
+        </trim>
+        where
+        uuid=#{uuid}
+        and
+        app_id=#{appId}
+    </update>
+    <update id="clearGameData">
+    update user_game_data_storage
+    set data_storage='',updated_at=now()
+    where uuid=#{uuid}
+    </update>
+
+    <select id="selectUserGameData" resultType="com.wre.game.api.data.entity.UserGameData"
+            parameterType="java.util.HashMap">
+        SELECT
+          id,
+          uuid,
+          app_id as appId,
+          app_name as appName,
+          param1,
+          param2,
+          param3,
+          param4,
+          param5,
+          score,
+          updated_at as updateAt,
+          created_at as createdAt
+        FROM user_game_data
+        WHERE
+          uuid = #{uuid}
+        AND
+          app_id = #{appId}
+    </select>
+
+    <select id="selectGameDataList" resultType="com.wre.game.api.data.dto.UserRankDTO"
+            parameterType="java.util.HashMap">
+        SELECT
+          ugc.id,
+          u.uuid,
+          u.open_id as openId,
+          u.nick_name as nickName,
+          u.avatar_url as avatarUrl,
+          u.gender,
+          u.app_id as appId,
+          u.app_name as appName,
+          ugc.param1,
+          ugc.param2,
+          ugc.param3,
+          ugc.param4,
+          ugc.param5,
+          ugc.score,
+          ugc.updated_at as dataUpdatedAt
+        FROM user_game_data ugc LEFT JOIN user u ON ugc.uuid = u.uuid
+        WHERE
+          ugc.app_id = #{appId}
+        ORDER BY ${orderBy} DESC
+        LIMIT #{limit}
+        OFFSET #{offset}
+
+    </select>
+
+    <select id="selectGameDataRank" resultType="com.wre.game.api.data.dto.UserRankDTO"
+            parameterType="java.util.HashMap">
+        SELECT
+           ugc.id,
+          u.uuid,
+          u.open_id as openId,
+          u.nick_name as nickName,
+          u.avatar_url as avatarUrl,
+          u.gender,
+          u.app_id as appId,
+          u.app_name as appName,
+          ugc.score,
+          ugc.updated_at as dataUpdatedAt
+        FROM user_game_data ugc LEFT JOIN user u ON ugc.uuid = u.uuid
+        WHERE
+          ugc.app_id = #{appId}
+        ORDER BY ugc.score DESC
+        LIMIT #{limit}
+    </select>
+
+</mapper>
