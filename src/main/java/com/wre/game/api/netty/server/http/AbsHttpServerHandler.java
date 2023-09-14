@@ -1,5 +1,6 @@
 package com.wre.game.api.netty.server.http;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.wre.game.api.message.NullObject;
 import com.wre.game.api.message.ResultCode;
@@ -65,7 +66,7 @@ public class AbsHttpServerHandler extends ChannelInboundHandlerAdapter {
 				String jsonStr = request.content().toString(Charsets.toCharset(CharEncoding.UTF_8));
 				if (contentType.equals("application/json")) {
 					if (!StringUtils.isEmpty(jsonStr)) {
-						hashMap.putAll((HashMap<String, String>) JSON.parseObject(jsonStr, Map.class));
+						hashMap.putAll((HashMap<String, String>) JSONUtil.toBean(jsonStr, Map.class));
 					}
 				}else if (contentType.equals("application/x-www-form-urlencoded")) {
 					QueryStringDecoder qsd = new QueryStringDecoder(jsonStr, false);

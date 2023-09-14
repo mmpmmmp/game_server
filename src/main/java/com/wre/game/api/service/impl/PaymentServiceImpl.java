@@ -1,5 +1,6 @@
 package com.wre.game.api.service.impl;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -63,23 +64,24 @@ public class PaymentServiceImpl implements PaymentService {
             if (verifyResult == null) {
                 return new ApiResponseDataMessage(new ApiResponseMessage("200", "苹果验证失败，返回数据为空", "201", "苹果验证失败，返回数据为空"), new RechargeAndroidRes(RechargeMessage.Android.STATE_OFF));
             } else {
-                JSONObject appleReturn = JSONObject.parseObject(verifyResult);
-                String states = appleReturn.getString("status");
+                cn.hutool.json.JSONObject appleReturn = JSONUtil.parseObj(verifyResult);
+                String states = appleReturn.getStr("status");
                 logger.info("苹果平台返回值：appleReturn" + appleReturn);
                 //无数据则沙箱环境验证
                 if ("21007".equals(states)) {
                     environment="SAND_BOX";
                     verifyResult = IosVerifyUtil.buyAppVerify(data.getPayload(), 0);
                     logger.info("沙盒环境，苹果平台返回JSON:" + verifyResult);
-                    appleReturn = JSONObject.parseObject(verifyResult);
-                    states = appleReturn.getString("status");
+//                    appleReturn = JSONObject.parseObject(verifyResult);
+                    appleReturn = JSONUtil.parseObj(verifyResult);
+                    states = appleReturn.getStr("status");
                 }
                 /**验证订单状态*/
                 if (!"0".equals(states)) {
                     return new ApiResponseDataMessage(new ApiResponseMessage("200", "支付失败，错误码：" + states, "204", "支付失败，错误码：" + states), new RechargeAndroidRes(RechargeMessage.Android.STATE_OFF));
                 }
                 /**验证订单在苹果是否存在*/
-                IosRechargeParam iosParam = JSONObject.parseObject(appleReturn.getString("receipt"), IosRechargeParam.class);
+                IosRechargeParam iosParam = JSONObject.parseObject(appleReturn.getStr("receipt"), IosRechargeParam.class);
                 iosParam.ListToMap();
                 IosRechargeInApp iosInApp = iosParam.getIn_app_map().get(data.getTransactionId());
                 if (iosInApp == null) {
@@ -129,7 +131,8 @@ public class PaymentServiceImpl implements PaymentService {
                 logger.error("充值RSA验证失败:" + JSON.toJSONString(body) + "---" + appId + "---" + publicKey);
                 return new ApiResponseDataMessage(new ApiResponseMessage("200", "verification failed", "201", "verification failed"), new RechargeAndroidRes(RechargeMessage.Android.STATE_OFF));
             }
-            RechargeAndroidInfo rechargeAndroidInfo = JSON.parseObject(body.getDataJson(), RechargeAndroidInfo.class);
+//            RechargeAndroidInfo rechargeAndroidInfo = JSON.parseObject(body.getDataJson(), RechargeAndroidInfo.class);
+            RechargeAndroidInfo rechargeAndroidInfo = JSONUtil.toBean(body.getDataJson(), RechargeAndroidInfo.class);
             if (!rechargeAndroidInfo.getObfuscatedProfileId().equals(body.getSerialId())) {
                 logger.error("充值订单错误:" + JSON.toJSONString(body.getSerialId()) + "充值:" + rechargeAndroidInfo.getObfuscatedProfileId());
                 return new ApiResponseDataMessage(new ApiResponseMessage("200", "order error", "208", "order error"), new RechargeAndroidRes(RechargeMessage.Android.STATE_OFF));
@@ -455,7 +458,8 @@ public class PaymentServiceImpl implements PaymentService {
             signature.update(body.getBody().getBytes(StandardCharsets.UTF_8));
             byte[] bsign = Base64.decodeBase64(body.getSign());
             boolean verify = signature.verify(bsign);
-            JSONObject jsonObject = JSONObject.parseObject(body.getBody());
+//            JSONObject jsonObject = JSONObject.parseObject(body.getBody());
+            cn.hutool.json.JSONObject jsonObject = JSONUtil.parseObj(body.getBody());
 
             if (verify) {
                 logger.info(body.getPurchaseToken()+"vertify success!");
@@ -579,7 +583,8 @@ public class PaymentServiceImpl implements PaymentService {
             if (!bean.getUserid().equals(body.getRole_id())) {
                 return "RoleId fail";
             }
-            JSONObject notifyDetail = JSON.parseObject(body.getNotifyDetail());
+//            JSONObject notifyDetail = JSON.parseObject(body.getNotifyDetail());
+            cn.hutool.json.JSONObject notifyDetail = JSONUtil.parseObj(body.getNotifyDetail());
             logger.info("notify_detail:"+notify_detail);
             Long subscribe_due_time = Long.valueOf(String.valueOf(notifyDetail.get("subscribe_due_time")));
             logger.info("subscribe_due_time:"+subscribe_due_time);

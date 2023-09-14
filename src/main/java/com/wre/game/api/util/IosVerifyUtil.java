@@ -1,13 +1,17 @@
 package com.wre.game.api.util;
 
+import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.util.StrUtil;
+
 import javax.net.ssl.*;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
+import java.security.KeyStore;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -15,6 +19,9 @@ import java.util.Locale;
  * Created by wangqichang on 2019/2/26.
  */
 public class IosVerifyUtil {
+
+    private static final List<String> VERIFY_HOST_NAME_ARRAY = ListUtil.toList("host");
+
     private static class TrustAnyTrustManager implements X509TrustManager {
 
         public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
@@ -33,6 +40,15 @@ public class IosVerifyUtil {
             return true;
         }
     }
+
+    private static class TrustAnyHostnameVerifierVerify implements HostnameVerifier {
+        public boolean verify(String hostname, SSLSession session) {
+            if (StrUtil.isEmpty(hostname)) {
+                return false;
+            }
+            return !VERIFY_HOST_NAME_ARRAY.contains(hostname);
+        }
+    };
 
     private static final String url_sandbox = "https://test/verifyReceipt";
     private static final String url_verify = "https://test/verifyReceipt";
@@ -58,11 +74,23 @@ public class IosVerifyUtil {
 
         try {
             SSLContext sc = SSLContext.getInstance("SSL");
-            sc.init(null, new TrustManager[] { new TrustAnyTrustManager() }, new java.security.SecureRandom());
+            File certificateFile = new File("data/to/ios/certificate");
+            KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+            keyStore.load(null, null);
+            X509Certificate generatedCertificate;
+            try (InputStream cert = new FileInputStream(certificateFile)) {
+                generatedCertificate = (X509Certificate) CertificateFactory.getInstance("X509")
+                        .generateCertificate(cert);
+            }
+            keyStore.setCertificateEntry(certificateFile.getName(), generatedCertificate);
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+            tmf.init(keyStore);
+            TrustManager[] trustManagers = tmf.getTrustManagers();
+            sc.init(null, trustManagers, new java.security.SecureRandom());
             URL console = new URL(url);
             HttpsURLConnection conn = (HttpsURLConnection) console.openConnection();
             conn.setSSLSocketFactory(sc.getSocketFactory());
-            conn.setHostnameVerifier(new TrustAnyHostnameVerifier());
+            conn.setHostnameVerifier(new TrustAnyHostnameVerifierVerify());
             conn.setRequestMethod("POST");
             conn.setRequestProperty("content-type", "text/json");
             conn.setRequestProperty("Proxy-Connection", "Keep-Alive");

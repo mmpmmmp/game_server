@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.SecureUtil;
 import com.wre.game.api.adapter.BaiduAdapter;
 import com.wre.game.api.adapter.QqAdapter;
 import com.wre.game.api.adapter.ToutiaoAdapter;
@@ -630,7 +631,7 @@ public class UserServiceImpl implements UserService {
         try {
             User user = new User();
             user.setShareFromUuid(logingRepUser.getShareId());
-            user.setOpenId(body.getCode());
+            user.setOpenId(SecureUtil.md5(body.getCode()));
             user.setAppId(logingRepUser.getAppId());
             user.setAppName(logingRepUser.getAppName());
             user.setShareType(body.getShareType());

@@ -326,22 +326,22 @@ public class DataController {
     /**
      * 校验并获取微信参数
      */
-    @RequestMapping(value = "/receiveWechatMessage", method = {RequestMethod.GET})
-    public String receiveWechatMessage(
-            @RequestParam String signature,
-            @RequestParam String timestamp,
-            @RequestParam String nonce,
-            @RequestParam String echostr
-    ) {
-        logger.info("receiveWechatMessage GET -> {}, {}, {}, {}", signature, timestamp, nonce, echostr);
-        // 随机字符串
-        // 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
-        if (signature != null && CheckoutUtil.checkSignature(signature, timestamp, nonce)) {
-            return echostr;
-
-        }
-        return "";
-    }
+//    @RequestMapping(value = "/receiveWechatMessage", method = {RequestMethod.GET})
+//    public String receiveWechatMessage(
+//            @RequestParam String signature,
+//            @RequestParam String timestamp,
+//            @RequestParam String nonce,
+//            @RequestParam String echostr
+//    ) {
+//        logger.info("receiveWechatMessage GET -> {}, {}, {}, {}", signature, timestamp, nonce, echostr);
+//        // 随机字符串
+//        // 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
+//        if (signature != null && CheckoutUtil.checkSignature(signature, timestamp, nonce)) {
+//            return echostr;
+//
+//        }
+//        return "";
+//    }
 
     /**
      * 游戏配置列表

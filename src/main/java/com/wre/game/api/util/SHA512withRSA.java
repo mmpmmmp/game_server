@@ -18,8 +18,8 @@ import java.security.spec.X509EncodedKeySpec;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
- 
- 
+
+
 /**
  *  * 数字签名
  *  * 1：SHA512withRSA，：将正文通过SHA512数字摘要后，将密文 再次通过生成的RSA密钥加密，生成数字签名，
@@ -40,7 +40,7 @@ public class SHA512withRSA {
      */
     public static KeyPair getKeyPair() throws NoSuchAlgorithmException {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        keyPairGenerator.initialize(1024);
+        keyPairGenerator.initialize(2048);
         //生成返回带有公钥和私钥的对象
         KeyPair generateKeyPair = keyPairGenerator.generateKeyPair();
         return generateKeyPair;
@@ -174,7 +174,7 @@ public class SHA512withRSA {
  
     //通过SHA1加密
     public static byte[] encryptMD5(String str) throws NoSuchAlgorithmException {
-        MessageDigest digest = MessageDigest.getInstance("SHA1");
+        MessageDigest digest = MessageDigest.getInstance("MD5");
         byte[] digest2 = digest.digest(str.getBytes());
         return digest2;
     }

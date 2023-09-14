@@ -1,6 +1,7 @@
 package com.wre.game.api.util;
 
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -37,13 +38,10 @@ public class HttpEntityGet {
             String str = IOUtils.toString(response.getEntity().getContent(), Charset.forName("UTF-8"));
             String qrcodeUrl = "";
             System.out.println(str);
-            JSONObject json = JSONObject.parseObject(str);
-            if (json != null) {
-                JSONObject chatroom = json.getJSONObject("chatroom");
-                if (chatroom != null) {
-                    qrcodeUrl = String.valueOf(chatroom.get("qrcode_url"));
-                }
-            }
+//            JSONObject json = JSONObject.parseObject(str);
+            cn.hutool.json.JSONObject json = JSONUtil.parseObj(str);
+            JSONObject chatroom = json.getJSONObject("chatroom");
+            qrcodeUrl = String.valueOf(chatroom.get("qrcode_url"));
             System.out.println(qrcodeUrl);
             byte[] bytes = IOUtils.toByteArray(new URI(qrcodeUrl));
             IOUtils.write(bytes, new FileOutputStream("/Users/admin/Desktop/test.png"));

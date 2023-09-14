@@ -1,5 +1,6 @@
 package com.wre.game.api.adapter.impl;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.wre.game.api.adapter.BaiduAdapter;
 import com.wre.game.api.adapter.WechatAdapter;
@@ -89,9 +90,10 @@ public class BaiduAdapterImpl implements BaiduAdapter {
 			String str = IOUtils.toString(response.getEntity().getContent(), Charset.forName("UTF-8"));
 			logger.info("get group qrcode link -> {}", str);
 			//            System.out.println("get qrcode link -> openId:" + openId + " response:" + str);
-			JSONObject json = JSONObject.parseObject(str);
+//			JSONObject json = JSONObject.parseObject(str);
+			cn.hutool.json.JSONObject json = JSONUtil.parseObj(str);
 			if (json != null) {
-				JSONObject chatroom = json.getJSONObject("chatroom");
+				cn.hutool.json.JSONObject chatroom = json.getJSONObject("chatroom");
 				if (chatroom != null) {
 					qrcodeUrl = String.valueOf(chatroom.get("qrcode_url"));
 				}

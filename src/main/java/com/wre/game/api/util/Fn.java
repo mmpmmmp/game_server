@@ -619,15 +619,15 @@ public class Fn {
 	/**
 	 * 判断一个url是否合法
 	 */
-	public static boolean isUrl(String pInput) {
-		if (pInput == null) {
-			return false;
-		}
-		String regEx = "^([hH][tT]{2}[pP]://|[hH][tT]{2}[pP][sS]://)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\/])+$";
-		Pattern p = Pattern.compile(regEx);
-		Matcher matcher = p.matcher(pInput);
-		return matcher.matches();
-	}
+//	public static boolean isUrl(String pInput) {
+//		if (pInput == null) {
+//			return false;
+//		}
+//		String regEx = "^([hH][tT]{2}[pP]://|[hH][tT]{2}[pP][sS]://)(([A-Za-z0-9-~]+).)+([A-Za-z0-9-~\\/])+$";
+//		Pattern p = Pattern.compile(regEx);
+//		Matcher matcher = p.matcher(pInput);
+//		return matcher.matches();
+//	}
 
 	/**
 	 * 获取随机数
