@@ -70,7 +70,7 @@ public class IosVerifyUtil {
             conn.setDoOutput(true);
             BufferedOutputStream hurlBufOus = new BufferedOutputStream(conn.getOutputStream());
 
-            String str = String.format(Locale.CHINA, "{\"receipt-data\":\"" + receipt + "\"}");//拼成固定的格式传给平台
+            String str = String.format(Locale.CHINA, "{\"receipt-data\":\"%s\"}", receipt);//拼成固定的格式传给平台
             hurlBufOus.write(str.getBytes());
             hurlBufOus.flush();
 

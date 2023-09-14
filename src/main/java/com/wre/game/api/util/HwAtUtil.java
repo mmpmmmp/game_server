@@ -1,6 +1,7 @@
 package com.wre.game.api.util;
 
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.wre.game.api.component.SessionComponentImpl;
 import com.wre.game.api.constants.RtCode;
 import com.wre.game.api.exception.RedisException;
@@ -45,8 +46,9 @@ public class HwAtUtil {
                     URLEncoder.encode(ProductSDKMessage.AssemblyLine.HW_CLIENT_SECRET, "UTF-8"), ProductSDKMessage.AssemblyLine.HW_CLIENT_ID);
             String response =
                     httpPost(TOKEN_URL, "application/x-www-form-urlencoded; charset=UTF-8", msgBody, 5000, 5000, null);
-            JSONObject obj = JSONObject.parseObject(response);
-            accessToken = obj.getString("access_token");
+//            JSONObject obj = JSONObject.parseObject(response);
+            JSONObject obj = JSONUtil.parseObj(response);
+            accessToken = obj.getStr("access_token");
             jedis.set("HWAT",accessToken);
             jedis.expire("HWAT",60);
             return accessToken;
