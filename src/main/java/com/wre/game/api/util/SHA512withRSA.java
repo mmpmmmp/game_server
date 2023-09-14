@@ -174,7 +174,7 @@ public class SHA512withRSA {
  
     //通过SHA1加密
     public static byte[] encryptMD5(String str) throws NoSuchAlgorithmException {
-        MessageDigest digest = MessageDigest.getInstance("MD5");
+        MessageDigest digest = MessageDigest.getInstance("SHA3-512");
         byte[] digest2 = digest.digest(str.getBytes());
         return digest2;
     }
